@@ -4,6 +4,7 @@
 package project1;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,12 +12,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.CapabilityType;
-
+import Pages.nopcommerceLogin;
 /**
  * @author M1053553
  *
  */
-public class CrossBrowser {
+public class CrossBrowserChange {
 
 	/**
 	 * @param args
@@ -29,6 +30,7 @@ public class CrossBrowser {
 		setBrowserConfig();
 		Login();
 		Logout(); 
+		driver.close();
 	}
 	public static void setBrowser() {
 		browser = "Chrome"; 
@@ -53,23 +55,26 @@ public class CrossBrowser {
 	public static void Login() {
 		driver.get("https://demo.nopcommerce.com/login?returnUrl=%2F");
 		driver.manage().window().maximize();
-		WebElement Email = driver.findElement(By.xpath("//input[@class ='email']"));
+/*		WebElement Email = driver.findElement(By.xpath("//input[@class ='email']"));
 		Email.sendKeys("Test@gmail.com");
-		WebElement Password = driver.findElement(By.className("password"));
+		
+    	WebElement Password = driver.findElement(By.className("password"));
 		Password.sendKeys("Test@123");
-		WebElement Submit = driver.findElement(By.xpath("//button[@class='button-1 login-button']"));
-		Submit.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		WebElement Submit = driver.findElement(By.xpath("//button[@class='button-1 login-button		Submit.click();
+*/
+		nopcommerceLogin.Email(driver).sendKeys("Test@gmail.com");
+
+		nopcommerceLogin.Password(driver).sendKeys("Test@123");
+
+		nopcommerceLogin.LoginBtn(driver).sendKeys(Keys.RETURN); //similar to click()
 	}
 	public static void Logout() {
-	//	WebElement LogoutBtn = driver.findElement(By.xpath("//a[@class=\"ico-logout\"]"));
+/*		WebElement LogoutBtn = driver.findElement(By.xpath("//a[@class=\"ico-logout\"]"));
 		WebElement LogoutBtn = driver.findElement(By.cssSelector(".ico-logout"));
 		LogoutBtn.click();
+*/		
+		nopcommerceLogin.LogoutBtn(driver).sendKeys(Keys.RETURN); //similar to click()
 	}
 
 }
